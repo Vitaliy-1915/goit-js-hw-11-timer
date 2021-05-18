@@ -4,6 +4,11 @@ const hoursEl = document.querySelector(`[data-value="hours"]`);
 const minsEl = document.querySelector(`[data-value="mins"]` );
 const secsEl = document.querySelector(`[data-value="secs"]`);
 
+const timer = new CountdownTimer({
+  selector: '#timer-1',
+  targetDate: new Date('June 23, 2021'), 
+});
+
 class CountdownTimer {
     constructor({selector, targetDate}) {
         this.selector = selector;
@@ -45,16 +50,11 @@ class CountdownTimer {
    
 };
 
-const timer = new CountdownTimer({
-  selector: '#timer-1',
-  targetDate: new Date('June 23, 2021'), 
-});
+
 
 
 
    
-// console.log(timer);
-// Для подсчета значений используй следующие готовые формулы,
-// где time - разница между targetDate и текущей датой.
+
 
 
