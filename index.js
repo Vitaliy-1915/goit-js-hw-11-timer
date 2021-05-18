@@ -5,29 +5,37 @@ const minsEl = document.querySelector(`[data-value="mins"]` );
 const secsEl = document.querySelector(`[data-value="secs"]`);
 
 class CountdownTimer {
-    constructor({selector, targetDate}) {
+    constructor({ selector, targetDate }) {
+        this.interval = null;
         this.selector = selector;
         this.targetDate = targetDate;
         this.start();
     }
 
     start() {
-        const startTime = this.targetDate;
-        setInterval(() => {
+
+        this.interval = setInterval(() => {
             const currentTime = Date.now();
-            const deltaTime = startTime - currentTime;
-            const { days, hours, mins, secs } = this.getTimeComponents(deltaTime)
+            const deltaTime = this.targetDate - currentTime;
             
-            this.updateTimerFace({ days, hours, mins, secs });
-        },1000);
+            if (deltaTime < 0) {    
+                return; 
+            } else {
+                const { days, hours, mins, secs } = this.getTimeComponents(deltaTime)
+                this.updateTimerFace({ days, hours, mins, secs });
+            }
+        }, 1000);
     }
-    
+
+    stop() {
+        clearInterval(this.interval);
+    }
+
     updateTimerFace ({ days, hours, mins, secs }) {
         daysEl.textContent = `${days}`;
         hoursEl.textContent = `${hours}`;
         minsEl.textContent = `${mins}`;
         secsEl.textContent = `${secs}`;
- 
     }
     
     getTimeComponents(time) {
@@ -47,7 +55,7 @@ class CountdownTimer {
 
 const timer = new CountdownTimer({
   selector: '#timer-1',
-  targetDate: new Date('June 23, 2021'), 
+  targetDate: new Date('june 23, 2021'), 
 });
 
 
