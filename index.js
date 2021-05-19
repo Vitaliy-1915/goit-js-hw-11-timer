@@ -1,9 +1,4 @@
 
-const daysEl = document.querySelector(`[data-value="days"]`);
-const hoursEl = document.querySelector(`[data-value="hours"]`);
-const minsEl = document.querySelector(`[data-value="mins"]` );
-const secsEl = document.querySelector(`[data-value="secs"]`);
-
 class CountdownTimer {
     constructor({ selector, targetDate }) {
         this.interval = null;
@@ -31,13 +26,13 @@ class CountdownTimer {
         clearInterval(this.interval);
     }
 
-    updateTimerFace ({ days, hours, mins, secs }) {
-        daysEl.textContent = `${days}`;
-        hoursEl.textContent = `${hours}`;
-        minsEl.textContent = `${mins}`;
-        secsEl.textContent = `${secs}`;
+    updateTimerFace({ days, hours, mins, secs }) {
+     document.querySelector(`${this.selector} span[data-value="days"]`).textContent = `${days}`;
+     document.querySelector(`${this.selector} span[data-value="hours"]`).textContent = `${hours}`;
+     document.querySelector(`${this.selector} span[data-value="mins"]` ).textContent = `${mins}`;
+     document.querySelector(`${this.selector} span[data-value="secs"]`).textContent = `${secs}`;
     }
-    
+
     getTimeComponents(time) {
         const days = this.pad(Math.floor(time / (1000 * 60 * 60 * 24)));
         const hours = this.pad(Math.floor((time % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)));
